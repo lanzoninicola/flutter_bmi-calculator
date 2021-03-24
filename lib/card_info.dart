@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 const Color activeBackgroundColor = Color.fromRGBO(23, 31, 51, 1);
-const Color baseBackgroundColor = Color.fromRGBO(23, 31, 51, 0.6);
+const Color baseBackgroundColor =
+    Colors.amber; //Color.fromRGBO(23, 31, 51, 0.6);
 const Color activeBorderColor = Color.fromRGBO(235, 21, 85, 1);
 const Color baseBorderColor = Color.fromRGBO(23, 31, 51, 0.6);
 

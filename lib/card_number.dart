@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class CardNumber extends StatelessWidget {
   final int number;
+  final double size;
 
-  CardNumber({this.number});
+  CardNumber({this.number, this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class CardNumber extends StatelessWidget {
       number.toString(),
       style: TextStyle(
         color: Colors.white,
-        fontSize: 70.0,
+        fontSize: size == null ? 70.0 : size,
         fontWeight: FontWeight.bold,
       ),
     );
