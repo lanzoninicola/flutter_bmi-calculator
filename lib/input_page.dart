@@ -1,3 +1,6 @@
+import 'package:bmi_calculator/data_selector.dart';
+import 'package:bmi_calculator/icon_text.dart';
+import 'package:bmi_calculator/height_data.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -32,25 +35,42 @@ class _InputPageState extends State<InputPage> {
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      child: GestureDetector(
+                      flex: 1,
+                      child: CardInfo(
                         onTap: () => setActive(Gender.Male),
-                        child: CardInfo(
-                          cardChild: FaIcon(FontAwesomeIcons.mars),
+                        cardChild: IconText(
+                          icon: FaIcon(
+                            FontAwesomeIcons.mars,
+                            color: Colors.white,
+                            size: 90.0,
+                          ),
+                          text: "MALE",
                           isActive: _currentGenderActive == Gender.Male
                               ? true
                               : false,
                         ),
+                        isActive:
+                            _currentGenderActive == Gender.Male ? true : false,
                       ),
                     ),
                     Expanded(
-                      child: GestureDetector(
+                      flex: 1,
+                      child: CardInfo(
                         onTap: () => setActive(Gender.Female),
-                        child: CardInfo(
-                          cardChild: FaIcon(FontAwesomeIcons.venus),
+                        cardChild: IconText(
+                          icon: FaIcon(
+                            FontAwesomeIcons.venus,
+                            color: Colors.white,
+                            size: 90.0,
+                          ),
+                          text: "FEMALE",
                           isActive: _currentGenderActive == Gender.Female
                               ? true
                               : false,
                         ),
+                        isActive: _currentGenderActive == Gender.Female
+                            ? true
+                            : false,
                       ),
                     )
                   ],
@@ -59,12 +79,10 @@ class _InputPageState extends State<InputPage> {
             ),
             Expanded(
                 flex: 1,
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: CardInfo(),
-                    )
-                  ],
+                child: Container(
+                  child: CardInfo(
+                    cardChild: HeightData(),
+                  ),
                 )),
             Expanded(
               flex: 1,
@@ -72,16 +90,28 @@ class _InputPageState extends State<InputPage> {
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      child: CardInfo(),
+                      child: CardInfo(
+                        cardChild: DataSelector(
+                          description: 'WEIGHT',
+                          initialValue: 50.0,
+                        ),
+                      ),
                     ),
                     Expanded(
-                      child: CardInfo(),
-                    )
+                      child: CardInfo(
+                        cardChild: DataSelector(
+                          description: 'AGE',
+                          initialValue: 20.0,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
-            BottomBar()
+            BottomBar(
+              isActive: _currentGenderActive == null ? false : true,
+            )
           ],
         ));
   }
