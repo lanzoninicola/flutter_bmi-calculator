@@ -1,9 +1,9 @@
-import 'package:bmi_calculator/card_number.dart';
-import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/components/card_number.dart';
+import 'package:bmi_calculator/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'enums/operations.dart';
+import '../enums/operations.dart';
 
 class DataSelector extends StatefulWidget {
   final double initialValue;

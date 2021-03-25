@@ -1,11 +1,11 @@
-import 'package:bmi_calculator/data_selector.dart';
-import 'package:bmi_calculator/icon_text.dart';
-import 'package:bmi_calculator/height_data.dart';
+import 'package:bmi_calculator/components/data_selector.dart';
+import 'package:bmi_calculator/components/icon_text.dart';
+import 'package:bmi_calculator/components/full_width_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:bmi_calculator/bottom_bar.dart';
-import 'package:bmi_calculator/card_info.dart';
+import 'package:bmi_calculator/components/bottom_bar.dart';
+import 'package:bmi_calculator/components/card_info.dart';
 import 'package:bmi_calculator/enums/gender.dart';
 
 class InputPage extends StatefulWidget {
@@ -81,7 +81,12 @@ class _InputPageState extends State<InputPage> {
                 flex: 1,
                 child: Container(
                   child: CardInfo(
-                    cardChild: HeightData(),
+                    cardChild: FullWidthSlider(
+                      title: 'HEIGHT',
+                      minValue: 130,
+                      maxValue: 220,
+                      initialValue: 180,
+                    ),
                   ),
                 )),
             Expanded(
@@ -111,6 +116,7 @@ class _InputPageState extends State<InputPage> {
             ),
             BottomBar(
               isActive: _currentGenderActive == null ? false : true,
+              text: 'CALCULATE YOUR BMI',
             )
           ],
         ));
