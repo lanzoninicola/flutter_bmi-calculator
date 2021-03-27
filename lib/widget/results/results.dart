@@ -1,6 +1,8 @@
 import 'package:bmi_calculator/components/bottom_bar.dart';
 import 'package:bmi_calculator/components/card_info.dart';
 import 'package:bmi_calculator/components/card_number.dart';
+import 'package:bmi_calculator/entity/bmi_profile.dart';
+
 import 'package:bmi_calculator/routing/resultsArguments.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,9 @@ class _ResultsState extends State<Results> {
   @override
   Widget build(BuildContext context) {
     final ResultsArguments args = ModalRoute.of(context).settings.arguments;
+
+    BMIProfile bmiProfile =
+        BMIProfile(height: args.height, weight: args.weight);
 
     return Scaffold(
         appBar: AppBar(
@@ -46,7 +51,7 @@ class _ResultsState extends State<Results> {
                       flex: 1,
                       child: Center(
                         child: Text(
-                          'NORMAL',
+                          bmiProfile.getResult(),
                           style: TextStyle(
                               color: Color.fromRGBO(33, 186, 107, 1),
                               fontSize: 16.0,
@@ -57,7 +62,7 @@ class _ResultsState extends State<Results> {
                     Expanded(
                       flex: 2,
                       child: CardNumber(
-                        number: 30,
+                        number: bmiProfile.calculateBMI().toInt(),
                         size: 120.0,
                       ),
                     ),
@@ -66,7 +71,7 @@ class _ResultsState extends State<Results> {
                       child: Column(
                         children: [
                           Text(
-                            'Normal BMI range:',
+                            bmiProfile.getInterpretation(),
                             style: TextStyle(
                                 color: Color.fromRGBO(109, 111, 123, 1),
                                 fontSize: 16.0),

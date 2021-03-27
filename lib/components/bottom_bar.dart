@@ -1,4 +1,4 @@
-import 'package:bmi_calculator/bmi_profile.dart';
+import 'package:bmi_calculator/entity/bmi_profile.dart';
 import 'package:flutter/material.dart';
 
 const Color bottomBarColor = Color.fromRGBO(235, 21, 85, 1);

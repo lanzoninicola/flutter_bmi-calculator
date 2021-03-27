@@ -1,11 +1,12 @@
-class FullWidthSliderEntity {
+import 'package:bmi_calculator/interfaces/full_width_slider.dart';
+
+class HeightSlider extends IFullWidthSlider {
   final double initialValue;
   final double minValue;
   final double maxValue;
-  double _currentValue;
+  double _currentValue = 0;
 
-  FullWidthSliderEntity(
-      {this.initialValue, this.minValue = 0, this.maxValue = 999999});
+  HeightSlider({this.initialValue, this.minValue = 0, this.maxValue = 999999});
 
   double getMinValue() {
     return minValue;

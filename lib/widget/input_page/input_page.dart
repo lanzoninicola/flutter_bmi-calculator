@@ -1,8 +1,11 @@
 import 'package:bmi_calculator/components/minus_plus_input.dart';
 import 'package:bmi_calculator/components/icon_text.dart';
 import 'package:bmi_calculator/components/full_width_slider.dart';
-import 'package:bmi_calculator/entity/full_width_slider_entity.dart';
-import 'package:bmi_calculator/entity/minus_plus_input_entity.dart';
+import 'package:bmi_calculator/entity/age_entity.dart';
+import 'package:bmi_calculator/entity/height_entity.dart';
+import 'package:bmi_calculator/entity/weight_entity.dart';
+import 'package:bmi_calculator/interfaces/full_width_slider.dart';
+import 'package:bmi_calculator/interfaces/minus_plus_input_entity.dart';
 import 'package:bmi_calculator/routing/resultsArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,14 +21,13 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender _currentGenderActive;
-  MinusPlusInputEntity weightData =
-      MinusPlusInputEntity(initialValue: 50, minValue: 30, maxValue: 500);
+  WeightEntity weightData =
+      WeightEntity(initialValue: 50, minValue: 30, maxValue: 500);
 
-  MinusPlusInputEntity ageData =
-      MinusPlusInputEntity(initialValue: 25, minValue: 5, maxValue: 120);
+  AgeEntity ageData = AgeEntity(initialValue: 25, minValue: 5, maxValue: 120);
 
-  FullWidthSliderEntity heightData =
-      FullWidthSliderEntity(initialValue: 180, minValue: 110, maxValue: 230);
+  HeightSlider heightData =
+      HeightSlider(initialValue: 180, minValue: 110, maxValue: 230);
 
   void changeHeight(double value) {
     setState(() {
@@ -41,7 +43,7 @@ class _InputPageState extends State<InputPage> {
 
   void increaseWeight() {
     setState(() {
-      weightData.decreaseValue();
+      weightData.increaseValue();
     });
   }
 
@@ -64,8 +66,9 @@ class _InputPageState extends State<InputPage> {
 
   @override
   Widget build(BuildContext context) {
-    ResultsArguments resultsArguments =
-        ResultsArguments(weightData.getCurrentValue(), 0);
+    ResultsArguments resultsArguments = ResultsArguments(
+        weightData.getCurrentValue().toInt(),
+        heightData.getCurrentValue().toInt());
 
     return Scaffold(
         appBar: AppBar(
@@ -171,7 +174,8 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             BottomBar(
-              onTap: () => Navigator.pushNamed(context, '/results'),
+              onTap: () => Navigator.pushNamed(context, '/results',
+                  arguments: resultsArguments),
               isActive: _currentGenderActive == null ? false : true,
               text: 'CALCULATE YOUR BMI',
             )

@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MinusPlusInput extends StatelessWidget {
-  final int initialValue;
+  final double initialValue;
   final String label;
-  final int currentValue;
-  final int minValue;
-  final int maxValue;
+  final double currentValue;
+  final double minValue;
+  final double maxValue;
   final Function increaseData;
   final Function decreaseData;
 
@@ -34,7 +34,7 @@ class MinusPlusInput extends StatelessWidget {
             style: kBaseLabelStyle,
           ),
           CardNumber(
-            number: currentValue,
+            number: currentValue.toInt(),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

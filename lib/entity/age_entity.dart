@@ -1,31 +1,33 @@
 import 'package:bmi_calculator/enums/operations.dart';
+import 'package:bmi_calculator/interfaces/minus_plus_input_entity.dart';
 
-class MinusPlusInputEntity {
-  final int initialValue;
-  final int minValue;
-  final int maxValue;
-  int _currentValue = 0;
+class AgeEntity extends IMinusPlusInputEntity {
+  final double initialValue;
+  final double minValue;
+  final double maxValue;
+  double _currentValue = 0;
 
-  MinusPlusInputEntity({
+  AgeEntity({
     this.initialValue,
     this.minValue = 0,
     this.maxValue = 999999,
   });
 
-  int getInitialValue() {
+  @override
+  double getInitialValue() {
     return initialValue;
   }
 
-  int getMinValue() {
+  double getMinValue() {
     return minValue;
   }
 
-  int getMaxValue() {
+  double getMaxValue() {
     return maxValue;
   }
 
   void decreaseValue() {
-    int nextCurrentValue;
+    double nextCurrentValue;
     nextCurrentValue = getCurrentValue();
     nextCurrentValue--;
     nextCurrentValue =
@@ -34,7 +36,7 @@ class MinusPlusInputEntity {
   }
 
   void increaseValue() {
-    int nextCurrentValue;
+    double nextCurrentValue;
     nextCurrentValue = getCurrentValue();
     print(_currentValue);
     nextCurrentValue++;
@@ -54,7 +56,7 @@ class MinusPlusInputEntity {
     }
   }
 
-  int getCurrentValue() {
+  double getCurrentValue() {
     if (_currentValue == 0) {
       return initialValue;
     }
