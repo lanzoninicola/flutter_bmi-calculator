@@ -1,6 +1,9 @@
-import 'package:bmi_calculator/components/data_selector.dart';
+import 'package:bmi_calculator/components/minus_plus_input.dart';
 import 'package:bmi_calculator/components/icon_text.dart';
 import 'package:bmi_calculator/components/full_width_slider.dart';
+import 'package:bmi_calculator/entity/full_width_slider_entity.dart';
+import 'package:bmi_calculator/entity/minus_plus_input_entity.dart';
+import 'package:bmi_calculator/routing/resultsArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -15,6 +18,44 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender _currentGenderActive;
+  MinusPlusInputEntity weightData =
+      MinusPlusInputEntity(initialValue: 50, minValue: 30, maxValue: 500);
+
+  MinusPlusInputEntity ageData =
+      MinusPlusInputEntity(initialValue: 25, minValue: 5, maxValue: 120);
+
+  FullWidthSliderEntity heightData =
+      FullWidthSliderEntity(initialValue: 180, minValue: 110, maxValue: 230);
+
+  void changeHeight(double value) {
+    setState(() {
+      heightData.setCurrentValue(value);
+    });
+  }
+
+  void decreaseWeight() {
+    setState(() {
+      weightData.decreaseValue();
+    });
+  }
+
+  void increaseWeight() {
+    setState(() {
+      weightData.decreaseValue();
+    });
+  }
+
+  void decreaseAge() {
+    setState(() {
+      ageData.decreaseValue();
+    });
+  }
+
+  void increaseAge() {
+    setState(() {
+      ageData.increaseValue();
+    });
+  }
 
   void setActive(Gender gender) {
     // ignore: sdk_version_set_literal
@@ -23,6 +64,9 @@ class _InputPageState extends State<InputPage> {
 
   @override
   Widget build(BuildContext context) {
+    ResultsArguments resultsArguments =
+        ResultsArguments(weightData.getCurrentValue(), 0);
+
     return Scaffold(
         appBar: AppBar(
           title: Text('BMI CALCULATOR'),
@@ -83,9 +127,11 @@ class _InputPageState extends State<InputPage> {
                   child: CardInfo(
                     cardChild: FullWidthSlider(
                       title: 'HEIGHT',
-                      minValue: 130,
-                      maxValue: 220,
-                      initialValue: 180,
+                      minValue: heightData.getMinValue(),
+                      maxValue: heightData.getMaxValue(),
+                      initialValue: heightData.getInitialValue(),
+                      currentValue: heightData.getCurrentValue(),
+                      onChanged: changeHeight,
                     ),
                   ),
                 )),
@@ -96,17 +142,27 @@ class _InputPageState extends State<InputPage> {
                   children: <Widget>[
                     Expanded(
                       child: CardInfo(
-                        cardChild: DataSelector(
-                          description: 'WEIGHT',
-                          initialValue: 50.0,
+                        cardChild: MinusPlusInput(
+                          label: 'WEIGHT',
+                          initialValue: weightData.getInitialValue(),
+                          minValue: weightData.getMinValue(),
+                          maxValue: weightData.getMaxValue(),
+                          decreaseData: decreaseWeight,
+                          increaseData: increaseWeight,
+                          currentValue: weightData.getCurrentValue(),
                         ),
                       ),
                     ),
                     Expanded(
                       child: CardInfo(
-                        cardChild: DataSelector(
-                          description: 'AGE',
-                          initialValue: 20.0,
+                        cardChild: MinusPlusInput(
+                          label: 'AGE',
+                          initialValue: ageData.getInitialValue(),
+                          minValue: ageData.getMinValue(),
+                          maxValue: ageData.getMaxValue(),
+                          decreaseData: decreaseAge,
+                          increaseData: increaseAge,
+                          currentValue: ageData.getCurrentValue(),
                         ),
                       ),
                     ),
@@ -115,6 +171,7 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             BottomBar(
+              onTap: () => Navigator.pushNamed(context, '/results'),
               isActive: _currentGenderActive == null ? false : true,
               text: 'CALCULATE YOUR BMI',
             )

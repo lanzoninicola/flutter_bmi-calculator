@@ -2,42 +2,22 @@ import 'package:bmi_calculator/components/card_number.dart';
 import 'package:bmi_calculator/constants/constants.dart';
 import 'package:flutter/material.dart';
 
-class FullWidthSlider extends StatefulWidget {
+class FullWidthSlider extends StatelessWidget {
   final String title;
+  final double currentValue;
   final double minValue;
   final double maxValue;
   final double initialValue;
+  final Function onChanged;
 
-  const FullWidthSlider(
-      {this.title, this.minValue, this.maxValue, this.initialValue});
-
-  @override
-  _FullWidthSliderState createState() => _FullWidthSliderState(
-      title: title,
-      minValue: minValue,
-      maxValue: maxValue,
-      initialValue: initialValue);
-}
-
-class _FullWidthSliderState extends State<FullWidthSlider> {
-  double _currentSliderValue;
-  final String title;
-  final double minValue;
-  final double maxValue;
-  final double initialValue;
-
-  _FullWidthSliderState(
-      {@required this.title,
-      @required this.minValue,
-      @required this.maxValue,
-      @required this.initialValue});
-
-  @override
-  void initState() {
-    super.initState();
-
-    _currentSliderValue = initialValue;
-  }
+  FullWidthSlider({
+    @required this.title,
+    @required this.minValue,
+    @required this.maxValue,
+    @required this.initialValue,
+    @required this.currentValue,
+    @required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +31,7 @@ class _FullWidthSliderState extends State<FullWidthSlider> {
             style: kBaseLabelStyle,
           ),
           CardNumber(
-            number: _currentSliderValue.toInt(),
+            number: currentValue.toInt(),
           ),
           SliderTheme(
             data: SliderTheme.of(context).copyWith(
@@ -60,15 +40,11 @@ class _FullWidthSliderState extends State<FullWidthSlider> {
                 thumbColor: Color.fromRGBO(235, 21, 85, 1),
                 overlayColor: Color.fromRGBO(49, 20, 47, 0.5)),
             child: Slider(
-              value: _currentSliderValue,
+              value: currentValue,
               min: minValue,
               max: maxValue,
-              label: _currentSliderValue.round().toString(),
-              onChanged: (double value) {
-                setState(() {
-                  _currentSliderValue = value;
-                });
-              },
+              label: currentValue.round().toString(),
+              onChanged: onChanged,
             ),
           )
         ],

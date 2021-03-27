@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/bmi_profile.dart';
 import 'package:flutter/material.dart';
 
 const Color bottomBarColor = Color.fromRGBO(235, 21, 85, 1);
@@ -5,14 +6,17 @@ const Color bottomBarColor = Color.fromRGBO(235, 21, 85, 1);
 class BottomBar extends StatelessWidget {
   final bool isActive;
   final String text;
+  final Function onTap;
 
-  BottomBar({this.isActive, @required this.text});
+  BottomBar({this.isActive, @required this.text, @required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('tapped');
+        if (isActive == true) {
+          onTap();
+        }
       },
       child: Container(
         color: bottomBarColor,

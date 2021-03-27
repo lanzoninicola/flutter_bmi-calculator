@@ -21,7 +21,7 @@ class BMICalculator extends StatelessWidget {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => InputPage(),
         // When navigating to the "/second" route, build the SecondScreen widget.
-        '/results': (context) => Results(),
+        Results.routeName: (context) => Results(),
       },
     );
   }

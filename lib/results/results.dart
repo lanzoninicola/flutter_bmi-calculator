@@ -1,10 +1,13 @@
 import 'package:bmi_calculator/components/bottom_bar.dart';
 import 'package:bmi_calculator/components/card_info.dart';
 import 'package:bmi_calculator/components/card_number.dart';
+import 'package:bmi_calculator/routing/resultsArguments.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Results extends StatefulWidget {
+  static const routeName = '/results';
+
   @override
   _ResultsState createState() => _ResultsState();
 }
@@ -12,6 +15,8 @@ class Results extends StatefulWidget {
 class _ResultsState extends State<Results> {
   @override
   Widget build(BuildContext context) {
+    final ResultsArguments args = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
         appBar: AppBar(
           title: Text('BMI CALCULATOR'),
@@ -124,6 +129,7 @@ class _ResultsState extends State<Results> {
               ),
             ),
             BottomBar(
+              onTap: () => Navigator.pop(context),
               isActive: true,
               text: 'RE-CALCULATE YOUR BMI',
             ),
